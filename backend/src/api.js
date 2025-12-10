@@ -1,6 +1,6 @@
 import express from "express"
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000 //Que use el puerto de la variable de entorno o el 300 por default
 
 app.get('/', (req, res) => {
   res.send('Hello World!asdasdasd')
