@@ -4,14 +4,15 @@
   "description": "",
   "main": "src/api.js",
   "scripts": {
-    "dev":"nodemon src/api.js"
+    "dev": "nodemon src/api.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "dependencies": {
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "pg": "^8.16.3"
   },
   "devDependencies": {
     "nodemon": "^3.1.11"
