@@ -24,7 +24,7 @@ async function getOneAgente(id) {
 }
 
 async function postAgente(nombre, especie, fecha_de_ingreso, estado, nivel_de_habilidad) {
-    const result = await dbClient.query('INSERTO INTO agentes(nombre, especie, fecha_de_ingresulto, estado, nivel_de_habilidad) VALUES ($1, $2, $3, $4, $5) RETURNING *', [nombre, especie, fecha_de_ingresulto, estado, nivel_de_habilidad])
+    const result = await dbClient.query('INSERTO INTO agentes(nombre, especie, fecha_de_ingreso, estado, nivel_de_habilidad) VALUES ($1, $2, $3, $4, $5) RETURNING *', [nombre, especie, fecha_de_ingreso, estado, nivel_de_habilidad])
 
     if (result.rowCount === 0) {
         return undefined
@@ -34,7 +34,22 @@ async function postAgente(nombre, especie, fecha_de_ingreso, estado, nivel_de_ha
 }
 
 async function putAgente(id) {
+    const result = await dbClient.query(
+        'UPDATE agentes SET nombre = $2, especie = $3, fecha_de_ingreso = $4, estado = $5, nivel_de_habilidad = $6 WHERE id = $1',
+        [id, nombre, especie, fecha_de_ingreso, estado, nivel_de_habilidad]);
 
+    if (result.rowCount === 0) {
+        return undefined;
+    }
+
+    return {
+        id: id,
+        nombre: nombre,
+        especie: especie,
+        fecha_de_ingreso: fecha_de_ingreso,
+        estado: estado,
+        nivel_de_habilidad: nivel_de_habilidad
+    }
 }
 
 async function deleteAgente(id) {
@@ -62,7 +77,7 @@ async function postMision(id_agente, id_villano, fecha, titulo, descripcion, est
     const result = await dbClient.query(
         'INSERT INTO misiones (id_agente, id_villano, fecha, titulo, descripcion, estado, coste, dificultad) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
         [id_agente, id_villano, fecha, titulo, descripcion, estado, coste, dificultad]);
-    
+
     if (result.rowCount === 0) {
         return undefined;
     }
@@ -82,7 +97,7 @@ async function postMision(id_agente, id_villano, fecha, titulo, descripcion, est
 async function putMision(id, id_agente, id_villano, fecha, titulo, descripcion, estado, coste, dificultad) {
     const result = await dbClient.query(
         'UPDATE misiones SET id_agente = $2, id_villano = $3, fecha = $4, titulo = $5, descripcion = $6, estado = $7, coste = $8, dificultad = $9 WHERE id = $1',
-    [id, id_agente, id_villano, fecha, titulo, descripcion, estado, coste, dificultad]);
+        [id, id_agente, id_villano, fecha, titulo, descripcion, estado, coste, dificultad]);
 
     if (result.rowCount === 0) {
         return undefined;
@@ -132,7 +147,7 @@ async function postVillano(nombre, edad, ocupacion, ubicacion, estado, apodo) {
     const result = await dbClient.query(
         'INSERT INTO villanos (nombre, edad, ocupacion, ubicacion, estado, apodo) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
         [nombre, edad, ocupacion, ubicacion, estado, apodo]);
-    
+
     if (result.rowCount === 0) {
         return undefined;
     }
@@ -152,7 +167,7 @@ async function putVillano(id, nombre, edad, ocupacion, ubicacion, estado, apodo)
     const result = await dbClient.query(
         'UPDATE villanos SET nombre = $2, edad = $3, ocupacion = $4, ubicacion = $5, estado = $6, apodo = $7 WHERE id = $1',
         [id, nombre, edad, ocupacion, ubicacion, estado, apodo]);
-    
+
     if (result.rowCount === 0) {
         return undefined;
     }
@@ -185,5 +200,15 @@ module.exports = {
     getOneAgente,
     putAgente,
     postAgente,
-    deleteAgente
+    deleteAgente,
+    putMision,
+    postMision,
+    deleteMision,
+    getAllMisiones,
+    getOneMision,
+    putVillano,
+    postVillano,
+    deleteVillano,
+    getAllVillanos,
+    getOneVillano
 };

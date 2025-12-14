@@ -14,7 +14,7 @@ import {
   getAllMisiones,
   getOneMision,
   postMision,
-  putMision, 
+  putMision,
   deleteMision
 } from "db"
 
@@ -64,8 +64,49 @@ app.post('/api/agentes', async (req, res) => {
 })
 
 //Editar Agente
-app.put('/api/agentes', (req, res) => {
+app.put('/api/agentes/:id', async (req, res) => {
+  let agente = await getOneAgente(req.params.id);
 
+  if (agente === undefined) {
+    return res.sendStatus(404);
+  }
+
+  if (req.body === undefined) {
+    return res.status(400).send("No body was provided");
+  }
+  const nombre = req.body.nombre;
+  const especie = req.body.especie;
+  const fecha_de_ingreso = req.body.fecha_de_ingreso;
+  const estado = req.body.estado;
+  const nivel_de_habilidad = req.body.nivel_de_habilidad;
+
+  if (nombre === undefined) {
+    return res.status(400).send("Name not provided");
+  }
+
+  if (especie === undefined) {
+    return res.status(400).send("Especie not provided");
+  }
+
+  if (fecha_de_ingreso === undefined) {
+    return res.status(400).send("Fecha de ingreso not provided");
+  }
+
+  if (estado === undefined) {
+    return res.status(400).send("Status not provided");
+  }
+
+  if (nivel_de_habilidad === undefined) {
+    return res.status(400).send("Nivel De Habilidad not provided");
+  }
+
+  agente = await putVillano(nombre, especie, fecha_de_ingreso, estado, nivel_de_habilidad);
+
+  if (agente === undefined) {
+    return res.sendStatus(500);
+  }
+
+  res.json(agente);
 })
 
 //Borrar Agente
@@ -99,48 +140,48 @@ app.get('/api/villanos/:id', async (req, res) => {
 
 //CREAR UN VILLANO
 app.post('/api/villanos', async (req, res) => {
-    if (req.body === undefined) {
-        return res.status(400).send("No body was provided");
-    }
-    
-    const nombre = req.body.nombre;
-    const edad = req.body.edad;
-    const ocupacion = req.body.ocupacion;
-    const ubicacion = req.body.ubicacion;
-    const estado = req.body.estado;
-    const apodo = req.body.apodo;
+  if (req.body === undefined) {
+    return res.status(400).send("No body was provided");
+  }
 
-    if ((await getOneVillano(id)) !== undefined) {
-        return res.status(409).send("The villian already exists");
-    }
+  const nombre = req.body.nombre;
+  const edad = req.body.edad;
+  const ocupacion = req.body.ocupacion;
+  const ubicacion = req.body.ubicacion;
+  const estado = req.body.estado;
+  const apodo = req.body.apodo;
 
-    if (nombre === undefined) {
-        return res.status(400).send("Name not provided");
-    }
+  if ((await getOneVillano(id)) !== undefined) {
+    return res.status(409).send("The villian already exists");
+  }
 
-    if (edad === undefined) {
-        return res.status(400).send("Age not provided");
-    }
+  if (nombre === undefined) {
+    return res.status(400).send("Name not provided");
+  }
 
-    if (ocupacion === undefined) {
-        return res.status(400).send("Occupation not provided");
-    }
+  if (edad === undefined) {
+    return res.status(400).send("Age not provided");
+  }
 
-    if (ubicacion === undefined) {
-        return res.status(400).send("Location not provided");
-    }
+  if (ocupacion === undefined) {
+    return res.status(400).send("Occupation not provided");
+  }
 
-    if (estado === undefined) {
-        return res.status(400).send("Status not provided");
-    }
+  if (ubicacion === undefined) {
+    return res.status(400).send("Location not provided");
+  }
 
-    if (apodo === undefined) {
-        return res.status(400).send("Nickname not provided");
-    }
+  if (estado === undefined) {
+    return res.status(400).send("Status not provided");
+  }
 
-    const villano = await createCousin(nombre, edad, ocupacion, ubicacion, estado, apodo);
+  if (apodo === undefined) {
+    return res.status(400).send("Nickname not provided");
+  }
 
-    res.status(201).json(villano);
+  const villano = await createVillano(nombre, edad, ocupacion, ubicacion, estado, apodo);
+
+  res.status(201).json(villano);
 });
 
 //EDITAR VILLANO
@@ -152,47 +193,47 @@ app.put('/api/villanos/:id', async (req, res) => {
   }
 
   if (req.body === undefined) {
-        return res.status(400).send("No body was provided");
-    }
+    return res.status(400).send("No body was provided");
+  }
 
-    const nombre = req.body.nombre;
-    const edad = req.body.edad;
-    const ocupacion = req.body.ocupacion;
-    const ubicacion = req.body.ubicacion;
-    const estado = req.body.estado;
-    const apodo = req.body.apodo;
+  const nombre = req.body.nombre;
+  const edad = req.body.edad;
+  const ocupacion = req.body.ocupacion;
+  const ubicacion = req.body.ubicacion;
+  const estado = req.body.estado;
+  const apodo = req.body.apodo;
 
-    if (nombre === undefined) {
-        return res.status(400).send("Name not provided");
-    }
+  if (nombre === undefined) {
+    return res.status(400).send("Name not provided");
+  }
 
-    if (edad === undefined) {
-        return res.status(400).send("Age not provided");
-    }
+  if (edad === undefined) {
+    return res.status(400).send("Age not provided");
+  }
 
-    if (ocupacion === undefined) {
-        return res.status(400).send("Occupation not provided");
-    }
+  if (ocupacion === undefined) {
+    return res.status(400).send("Occupation not provided");
+  }
 
-    if (ubicacion === undefined) {
-        return res.status(400).send("Location not provided");
-    }
+  if (ubicacion === undefined) {
+    return res.status(400).send("Location not provided");
+  }
 
-    if (estado === undefined) {
-        return res.status(400).send("Status not provided");
-    }
+  if (estado === undefined) {
+    return res.status(400).send("Status not provided");
+  }
 
-    if (apodo === undefined) {
-        return res.status(400).send("Nickname not provided");
-    }
+  if (apodo === undefined) {
+    return res.status(400).send("Nickname not provided");
+  }
 
-    villano = await putVillano(nombre, edad, ocupacion, ubicacion, estado, apodo);
+  villano = await putVillano(nombre, edad, ocupacion, ubicacion, estado, apodo);
 
-    if (villano === undefined) {
-        return res.sendStatus(500);
-    }
+  if (villano === undefined) {
+    return res.sendStatus(500);
+  }
 
-    res.json(villano);
+  res.json(villano);
 });
 
 //ELIMINAR VILLANO
@@ -203,7 +244,7 @@ app.delete('/api/villanos/:id', async (req, res) => {
     return res.sendStatus(404);
   }
 
-  if(!(await deleteVillano(req.params.id))) {
+  if (!(await deleteVillano(req.params.id))) {
     return res.sendStatus(500);
   }
 
@@ -232,57 +273,57 @@ app.get('/api/misiones/:id', async (req, res) => {
 //CREAR UNA MISION
 app.post('/api/misiones', async (req, res) => {
   if (req.body === undefined) {
-        return res.status(400).send("No body was provided");
-    }
-    
-    const id_agente = req.body.id_agente;
-    const id_villano = req.body.id_villano;
-    const fecha = req.body.fecha;
-    const titulo = req.body.titulo;
-    const descripcion = req.body.descripcion;
-    const estado = req.body.estado;
-    const coste = req.body.coste;
-    const dificultad = req.body.dificultad;
+    return res.status(400).send("No body was provided");
+  }
 
-    if ((await getOneMision(id)) !== undefined) {
-        return res.status(409).send("The mission already exists");
-    }
+  const id_agente = req.body.id_agente;
+  const id_villano = req.body.id_villano;
+  const fecha = req.body.fecha;
+  const titulo = req.body.titulo;
+  const descripcion = req.body.descripcion;
+  const estado = req.body.estado;
+  const coste = req.body.coste;
+  const dificultad = req.body.dificultad;
 
-    if (id_agente === undefined) {
-        return res.status(400).send("Agent ID not provided");
-    }
+  if ((await getOneMision(id)) !== undefined) {
+    return res.status(409).send("The mission already exists");
+  }
 
-    if (id_villano === undefined) {
-        return res.status(400).send("Villain ID not provided");
-    }
+  if (id_agente === undefined) {
+    return res.status(400).send("Agent ID not provided");
+  }
 
-    if (fecha === undefined) {
-        return res.status(400).send("Date not provided");
-    }
+  if (id_villano === undefined) {
+    return res.status(400).send("Villain ID not provided");
+  }
 
-    if (titulo === undefined) {
-        return res.status(400).send("Title not provided");
-    }
+  if (fecha === undefined) {
+    return res.status(400).send("Date not provided");
+  }
 
-    if (descripcion === undefined) {
-        return res.status(400).send("Description not provided");
-    }
+  if (titulo === undefined) {
+    return res.status(400).send("Title not provided");
+  }
 
-    if (estado === undefined) {
-        return res.status(400).send("Status not provided");
-    }
+  if (descripcion === undefined) {
+    return res.status(400).send("Description not provided");
+  }
 
-    if (coste === undefined) {
-        return res.status(400).send("Cost not provided");
-    }
+  if (estado === undefined) {
+    return res.status(400).send("Status not provided");
+  }
 
-    if (dificultad === undefined) {
-        return res.status(400).send("Difficulty  not provided");
-    }
+  if (coste === undefined) {
+    return res.status(400).send("Cost not provided");
+  }
 
-    const mision = await postMision(id_agente, id_villano, fecha, titulo, descripcion, estado, coste, dificultad);
+  if (dificultad === undefined) {
+    return res.status(400).send("Difficulty  not provided");
+  }
 
-    res.status(201).json(mision);
+  const mision = await postMision(id_agente, id_villano, fecha, titulo, descripcion, estado, coste, dificultad);
+
+  res.status(201).json(mision);
 })
 
 //EDITAR UNA MISION
@@ -294,57 +335,57 @@ get.put('/api/misiones/:id', async (req, res) => {
   }
 
   if (req.body === undefined) {
-        return res.status(400).send("No body was provided");
-    }
+    return res.status(400).send("No body was provided");
+  }
 
-    const id_agente = req.body.id_agente;
-    const id_villano = req.body.id_villano;
-    const fecha = req.body.fecha;
-    const titulo = req.body.titulo;
-    const descripcion = req.body.descripcion;
-    const estado = req.body.estado;
-    const coste = req.body.coste;
-    const dificultad = req.body.dificultad;
+  const id_agente = req.body.id_agente;
+  const id_villano = req.body.id_villano;
+  const fecha = req.body.fecha;
+  const titulo = req.body.titulo;
+  const descripcion = req.body.descripcion;
+  const estado = req.body.estado;
+  const coste = req.body.coste;
+  const dificultad = req.body.dificultad;
 
-    if (id_agente === undefined) {
-        return res.status(400).send("Agent ID not provided");
-    }
+  if (id_agente === undefined) {
+    return res.status(400).send("Agent ID not provided");
+  }
 
-    if (id_villano === undefined) {
-        return res.status(400).send("Villain ID not provided");
-    }
+  if (id_villano === undefined) {
+    return res.status(400).send("Villain ID not provided");
+  }
 
-    if (fecha === undefined) {
-        return res.status(400).send("Date not provided");
-    }
+  if (fecha === undefined) {
+    return res.status(400).send("Date not provided");
+  }
 
-    if (titulo === undefined) {
-        return res.status(400).send("Title not provided");
-    }
+  if (titulo === undefined) {
+    return res.status(400).send("Title not provided");
+  }
 
-    if (descripcion === undefined) {
-        return res.status(400).send("Description not provided");
-    }
+  if (descripcion === undefined) {
+    return res.status(400).send("Description not provided");
+  }
 
-    if (estado === undefined) {
-        return res.status(400).send("Status not provided");
-    }
+  if (estado === undefined) {
+    return res.status(400).send("Status not provided");
+  }
 
-    if (coste === undefined) {
-        return res.status(400).send("Cost not provided");
-    }
+  if (coste === undefined) {
+    return res.status(400).send("Cost not provided");
+  }
 
-    if (dificultad === undefined) {
-        return res.status(400).send("Difficulty  not provided");
-    }
+  if (dificultad === undefined) {
+    return res.status(400).send("Difficulty  not provided");
+  }
 
-    mision = await putMision(id_agente, id_villano, fecha, titulo, descripcion, estado, coste, dificultad);
+  mision = await putMision(id_agente, id_villano, fecha, titulo, descripcion, estado, coste, dificultad);
 
-    if (mision === undefined) {
-        return res.sendStatus(500);
-    }
+  if (mision === undefined) {
+    return res.sendStatus(500);
+  }
 
-    res.json(mision);
+  res.json(mision);
 });
 
 //ELIMINAR MISION
@@ -355,7 +396,7 @@ app.delete('/api/misiones/:id', async (req, res) => {
     return res.sendStatus(404);
   }
 
-  if(!(await deleteMision(req.params.id))) {
+  if (!(await deleteMision(req.params.id))) {
     return res.sendStatus(500);
   }
 
