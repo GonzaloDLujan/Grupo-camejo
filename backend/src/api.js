@@ -16,10 +16,12 @@ import {
   postMision,
   putMision,
   deleteMision
-} from "db"
+} from "./db.js"
 
 const app = express()
 const port = 3000
+
+app.use(express.json());
 
 app.get('/', (req, res) => {
   res.send('Hello World!asdasdasd')
@@ -50,18 +52,32 @@ app.get('/api/agentes/:id', async (req, res) => {
 
 //Insertar Agente
 app.post('/api/agentes', async (req, res) => {
+  const {
+    nombre,
+    especie,
+    fecha_de_ingreso,
+    estado,
+    nivel_de_habilidad
+  } = req.body;
 
-  if (!req.params.nombre || !req.params.especie || !req.params.fecha_de_ingreso || !req.params.estado || !req.params.nivel_de_habilidad) {
-    return res.status(400).json({ error: "Missing Required Fields" })
+  if (!nombre || !especie || !fecha_de_ingreso || !estado || !nivel_de_habilidad) {
+    return res.status(400).json({ error: "Missing Required Fields" });
   }
-  const agente = await postAgente(req.params.nombre, req.params.especie, req.params.fecha_de_ingreso, req.params.estado, req.params.nivel_de_habilidad)
+
+  const agente = await postAgente(
+    nombre,
+    especie,
+    fecha_de_ingreso,
+    estado,
+    nivel_de_habilidad
+  );
 
   if (!agente) {
-    return res.status(500).json({ error: 'Failed To Create Agente' })
-  } else {
-    return res.json(agente)
+    return res.status(500).json({ error: 'Failed To Create Agente' });
   }
-})
+
+  return res.status(201).json(agente);
+});
 
 //Editar Agente
 app.put('/api/agentes/:id', async (req, res) => {
@@ -74,11 +90,13 @@ app.put('/api/agentes/:id', async (req, res) => {
   if (req.body === undefined) {
     return res.status(400).send("No body was provided");
   }
-  const nombre = req.body.nombre;
-  const especie = req.body.especie;
-  const fecha_de_ingreso = req.body.fecha_de_ingreso;
-  const estado = req.body.estado;
-  const nivel_de_habilidad = req.body.nivel_de_habilidad;
+  const {
+    nombre,
+    especie,
+    fecha_de_ingreso,
+    estado,
+    nivel_de_habilidad
+  } = req.body;
 
   if (nombre === undefined) {
     return res.status(400).send("Name not provided");
@@ -100,7 +118,7 @@ app.put('/api/agentes/:id', async (req, res) => {
     return res.status(400).send("Nivel De Habilidad not provided");
   }
 
-  agente = await putVillano(nombre, especie, fecha_de_ingreso, estado, nivel_de_habilidad);
+  agente = await putAgente(req.params.id, nombre, especie, fecha_de_ingreso, estado, nivel_de_habilidad);
 
   if (agente === undefined) {
     return res.sendStatus(500);
@@ -144,16 +162,14 @@ app.post('/api/villanos', async (req, res) => {
     return res.status(400).send("No body was provided");
   }
 
-  const nombre = req.body.nombre;
-  const edad = req.body.edad;
-  const ocupacion = req.body.ocupacion;
-  const ubicacion = req.body.ubicacion;
-  const estado = req.body.estado;
-  const apodo = req.body.apodo;
-
-  if ((await getOneVillano(id)) !== undefined) {
-    return res.status(409).send("The villian already exists");
-  }
+  const {
+    nombre,
+    edad,
+    ocupacion,
+    ubicacion,
+    estado,
+    apodo
+  } = req.body
 
   if (nombre === undefined) {
     return res.status(400).send("Name not provided");
@@ -179,7 +195,7 @@ app.post('/api/villanos', async (req, res) => {
     return res.status(400).send("Nickname not provided");
   }
 
-  const villano = await createVillano(nombre, edad, ocupacion, ubicacion, estado, apodo);
+  const villano = await postVillano(nombre, edad, ocupacion, ubicacion, estado, apodo);
 
   res.status(201).json(villano);
 });
@@ -196,12 +212,13 @@ app.put('/api/villanos/:id', async (req, res) => {
     return res.status(400).send("No body was provided");
   }
 
-  const nombre = req.body.nombre;
-  const edad = req.body.edad;
-  const ocupacion = req.body.ocupacion;
-  const ubicacion = req.body.ubicacion;
-  const estado = req.body.estado;
-  const apodo = req.body.apodo;
+  const {
+    nombre,
+    edad,
+    ocupacion,
+    ubicacion,
+    estado,apodo
+  } = req.body
 
   if (nombre === undefined) {
     return res.status(400).send("Name not provided");
@@ -227,7 +244,7 @@ app.put('/api/villanos/:id', async (req, res) => {
     return res.status(400).send("Nickname not provided");
   }
 
-  villano = await putVillano(nombre, edad, ocupacion, ubicacion, estado, apodo);
+  villano = await putVillano(req.params.id, nombre, edad, ocupacion, ubicacion, estado, apodo);
 
   if (villano === undefined) {
     return res.sendStatus(500);
@@ -276,14 +293,16 @@ app.post('/api/misiones', async (req, res) => {
     return res.status(400).send("No body was provided");
   }
 
-  const id_agente = req.body.id_agente;
-  const id_villano = req.body.id_villano;
-  const fecha = req.body.fecha;
-  const titulo = req.body.titulo;
-  const descripcion = req.body.descripcion;
-  const estado = req.body.estado;
-  const coste = req.body.coste;
-  const dificultad = req.body.dificultad;
+  const {
+    id_agente,
+    id_villano, 
+    fecha, 
+    titulo, 
+    descripcion, 
+    estado,
+    coste,
+    dificultad
+} = req.body
 
   if ((await getOneMision(id)) !== undefined) {
     return res.status(409).send("The mission already exists");
@@ -327,7 +346,7 @@ app.post('/api/misiones', async (req, res) => {
 })
 
 //EDITAR UNA MISION
-get.put('/api/misiones/:id', async (req, res) => {
+app.put('/api/misiones/:id', async (req, res) => {
   let mision = await getOneMision(req.params.id);
 
   if (mision === undefined) {
@@ -338,14 +357,16 @@ get.put('/api/misiones/:id', async (req, res) => {
     return res.status(400).send("No body was provided");
   }
 
-  const id_agente = req.body.id_agente;
-  const id_villano = req.body.id_villano;
-  const fecha = req.body.fecha;
-  const titulo = req.body.titulo;
-  const descripcion = req.body.descripcion;
-  const estado = req.body.estado;
-  const coste = req.body.coste;
-  const dificultad = req.body.dificultad;
+  const {
+    id_agente,
+    id_villano, 
+    fecha, 
+    titulo, 
+    descripcion, 
+    estado,
+    coste,
+    dificultad
+} = req.body
 
   if (id_agente === undefined) {
     return res.status(400).send("Agent ID not provided");
@@ -379,7 +400,7 @@ get.put('/api/misiones/:id', async (req, res) => {
     return res.status(400).send("Difficulty  not provided");
   }
 
-  mision = await putMision(id_agente, id_villano, fecha, titulo, descripcion, estado, coste, dificultad);
+  mision = await putMision(req.params.id, id_agente, id_villano, fecha, titulo, descripcion, estado, coste, dificultad);
 
   if (mision === undefined) {
     return res.sendStatus(500);

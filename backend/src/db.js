@@ -1,14 +1,14 @@
 //Este archivo se encarga de la comunicacion entre la DB y el Backend
 
-import { Pool } from pg
+import { Pool } from "pg"
 
 //Conexion con la DB
 const dbClient = new Pool({
-    user: 'postgresult',
+    user: 'postgres',
     port: 5432,
     host: 'localhost',
-    database: 'OWCA',
-    password: 'postgresult'
+    database: 'agencia',
+    password: 'postgres'
 });
 
 //--------AGENTES---------------
@@ -24,7 +24,7 @@ async function getOneAgente(id) {
 }
 
 async function postAgente(nombre, especie, fecha_de_ingreso, estado, nivel_de_habilidad) {
-    const result = await dbClient.query('INSERTO INTO agentes(nombre, especie, fecha_de_ingreso, estado, nivel_de_habilidad) VALUES ($1, $2, $3, $4, $5) RETURNING *', [nombre, especie, fecha_de_ingreso, estado, nivel_de_habilidad])
+    const result = await dbClient.query('INSERT INTO agentes (nombre, especie, fecha_de_ingreso, estado, nivel_de_habilidad) VALUES ($1, $2, $3, $4, $5) RETURNING *', [nombre, especie, fecha_de_ingreso, estado, nivel_de_habilidad])
 
     if (result.rowCount === 0) {
         return undefined
@@ -33,7 +33,7 @@ async function postAgente(nombre, especie, fecha_de_ingreso, estado, nivel_de_ha
     }
 }
 
-async function putAgente(id) {
+async function putAgente(id, nombre, especie, fecha_de_ingreso, estado, nivel_de_habilidad) {
     const result = await dbClient.query(
         'UPDATE agentes SET nombre = $2, especie = $3, fecha_de_ingreso = $4, estado = $5, nivel_de_habilidad = $6 WHERE id = $1',
         [id, nombre, especie, fecha_de_ingreso, estado, nivel_de_habilidad]);
@@ -184,7 +184,7 @@ async function putVillano(id, nombre, edad, ocupacion, ubicacion, estado, apodo)
 }
 
 async function deleteVillano(id) {
-    const resut = await dbClient.query('DELETE FROM villanos WHERE id = $1', [id]);
+    const result = await dbClient.query('DELETE FROM villanos WHERE id = $1', [id]);
 
     if (result.rowCount === 0) {
         return undefined;
@@ -195,17 +195,19 @@ async function deleteVillano(id) {
 
 //-------EXPORTACION DE FUNCIONES-------
 
-module.exports = {
+export {
     getAllAgentes,
     getOneAgente,
     putAgente,
     postAgente,
     deleteAgente,
+    
     putMision,
     postMision,
     deleteMision,
     getAllMisiones,
     getOneMision,
+    
     putVillano,
     postVillano,
     deleteVillano,
