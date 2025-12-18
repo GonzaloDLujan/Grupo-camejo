@@ -6,21 +6,42 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>Agentes</h1>
-        <nav>
-            <a href="index.html"><button>Inicio</button></a>
-            <a href="misiones.html"><button>Misiones</button></a>
-            <a href="villanos.html"><button>Villanos</button></a>
-        </nav>
-    </header>
-    <main>
-        <p>Agregar aca agentes.</p>
-    </main>
-    <footer>
-    <p>
-        2c 2025, Trabajo Practico Final Facultad de Ingenieria de la Universidad de Buenos Aires
-    </p>
-    </footer>
+
+<header>
+    <h1>Agentes</h1>
+    <nav>
+        <a href="index.html"><button>Inicio</button></a>
+        <a href="misiones.html"><button>Misiones</button></a>
+        <a href="villanos.html"><button>Villanos</button></a>
+    </nav>
+</header>
+
+<main>
+    <section>
+        <h2>Lista de Agentes</h2>
+        <button id="btnCargar">Cargar agentes</button>
+        <ul id="listaAgentes"></ul>
+    </section>
+
+    <section>
+        <h2>Crear Agente</h2>
+
+        <form id="formAgente">
+            <input type="text" id="nombre" placeholder="Nombre" required>
+            <input type="text" id="especie" placeholder="Especie" required>
+            <input type="date" id="fecha" required>
+            <input type="text" id="estado" placeholder="Estado" required>
+            <input type="number" id="nivel" placeholder="Nivel de habilidad" required>
+            <button type="submit">Crear</button>
+        </form>
+    </section>
+</main>
+
+<footer>
+    <p>2c 2025, Trabajo Practico Final Facultad de Ingenieria de la Universidad de Buenos Aires</p>
+</footer>
+
+<script type="module" src="agentes.js"></script>
+
 </body>
 </html>
