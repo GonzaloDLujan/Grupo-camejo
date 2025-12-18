@@ -45,7 +45,6 @@ export async function eliminarAgente(id) {
   return response.json();
 }
 
-// IMPORTAMOS LAS FUNCIONES DE LA API
 import {
   getAgentes,
   getAgente,
@@ -54,14 +53,12 @@ import {
   eliminarAgente
 } from "./api.js";
 
-// REFERENCIAS AL DOM
 const btnCargar = document.getElementById("btnCargar");
 const listaAgentes = document.getElementById("listaAgentes");
 const formAgente = document.getElementById("formAgente");
 
 async function cargarAgentes() {
   listaAgentes.innerHTML = "";
-
   try {
     const agentes = await getAgentes();
     agentes.forEach(agente => {
@@ -72,11 +69,9 @@ async function cargarAgentes() {
       `;
       const btnEliminar = document.createElement("button");
       btnEliminar.textContent = "Eliminar";
-
       btnEliminar.addEventListener("click", async () => {
         const confirmar = confirm("¿Seguro que querés eliminar este agente?");
         if (!confirmar) return;
-
         await eliminarAgente(agente.id);
         cargarAgentes();
       });
@@ -105,7 +100,6 @@ btnCargar.addEventListener("click", cargarAgentes);
 
 formAgente.addEventListener("submit", async (e) => {
   e.preventDefault();
-
   const nuevoAgente = {
     nombre: document.getElementById("nombre").value,
     especie: document.getElementById("especie").value,
@@ -113,7 +107,6 @@ formAgente.addEventListener("submit", async (e) => {
     estado: document.getElementById("estado").value,
     nivel: Number(document.getElementById("nivel").value)
   };
-
   try {
     await crearAgente(nuevoAgente);
     alert("Agente creado correctamente");
