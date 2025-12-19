@@ -13,6 +13,17 @@ async function llenar_pagina() {
                 const newFolder = document.createElement("div")
                 newFolder.className = "folder"
 
+                // BOTÓN BORRAR
+                const deleteBtn = document.createElement("button")
+                deleteBtn.className = "button is-danger"
+                deleteBtn.innerText = "X"
+
+                // acción
+                deleteBtn.addEventListener("click", (e) => {
+                    e.stopPropagation() //asi no entra a la mision en si
+                    borrarMision(mision.id)
+                })
+
                 newFolder.appendChild(deleteBtn)
 
                 const newFolderTab = document.createElement("div")
@@ -52,4 +63,8 @@ async function llenar_pagina() {
         console.log(error)
     }
 
+    async function borrarMision(id) {
+        fetch(API_URL_MISION + id, { method: 'DELETE' }).then(
+            llenar_pagina)
+    }
 }
