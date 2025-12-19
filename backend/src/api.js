@@ -297,17 +297,13 @@ app.post('/api/misiones', async (req, res) => {
   const {
     id_agente,
     id_villano,
-    fecha,
     titulo,
     descripcion,
     estado,
     coste,
-    dificultad
+    nivel_de_dificultad,
+    imagen_url
   } = req.body
-
-  if ((await getOneMision(id)) !== undefined) {
-    return res.status(409).send("The mission already exists");
-  }
 
   if (id_agente === undefined) {
     return res.status(400).send("Agent ID not provided");
@@ -315,10 +311,6 @@ app.post('/api/misiones', async (req, res) => {
 
   if (id_villano === undefined) {
     return res.status(400).send("Villain ID not provided");
-  }
-
-  if (fecha === undefined) {
-    return res.status(400).send("Date not provided");
   }
 
   if (titulo === undefined) {
@@ -337,11 +329,11 @@ app.post('/api/misiones', async (req, res) => {
     return res.status(400).send("Cost not provided");
   }
 
-  if (dificultad === undefined) {
+  if (nivel_de_dificultad === undefined) {
     return res.status(400).send("Difficulty  not provided");
   }
 
-  const mision = await postMision(id_agente, id_villano, fecha, titulo, descripcion, estado, coste, dificultad);
+  const mision = await postMision(id_agente, id_villano, imagen_url, titulo, descripcion, estado, coste, nivel_de_dificultad);
 
   res.status(201).json(mision);
 })
@@ -361,12 +353,12 @@ app.put('/api/misiones/:id', async (req, res) => {
   const {
     id_agente,
     id_villano,
-    fecha,
     titulo,
     descripcion,
     estado,
     coste,
-    dificultad
+    nivel_de_dificultad,
+    imagen_url
   } = req.body
 
   if (id_agente === undefined) {
@@ -376,11 +368,6 @@ app.put('/api/misiones/:id', async (req, res) => {
   if (id_villano === undefined) {
     return res.status(400).send("Villain ID not provided");
   }
-
-  if (fecha === undefined) {
-    return res.status(400).send("Date not provided");
-  }
-
   if (titulo === undefined) {
     return res.status(400).send("Title not provided");
   }
@@ -397,11 +384,11 @@ app.put('/api/misiones/:id', async (req, res) => {
     return res.status(400).send("Cost not provided");
   }
 
-  if (dificultad === undefined) {
+  if (nivel_de_dificultad === undefined) {
     return res.status(400).send("Difficulty  not provided");
   }
 
-  mision = await putMision(req.params.id, id_agente, id_villano, fecha, titulo, descripcion, estado, coste, dificultad);
+  mision = await putMision(req.params.id, id_agente, id_villano, imagen_url, titulo, descripcion, estado, coste, nivel_de_dificultad);
 
   if (mision === undefined) {
     return res.sendStatus(500);
