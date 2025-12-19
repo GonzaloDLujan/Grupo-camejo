@@ -3,9 +3,10 @@ CREATE TABLE agentes (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL,
     especie VARCHAR(50) NOT NULL,
-    fecha_de_ingreso DATE DEFAULT ,
+    fecha_de_ingreso DATE DEFAULT,
     estado VARCHAR(20) NOT NULL,
-    nivel_de_habilidad INT NOT NULL
+    nivel_de_habilidad INT NOT NULL,
+    imagen_url VARCHAR(200)
 );
 
 -- entidad 2
@@ -16,7 +17,8 @@ CREATE TABLE villanos (
     ocupacion VARCHAR(50),
     ubicacion VARCHAR(100),
     estado VARCHAR(20) NOT NULL,
-    apodo VARCHAR(50) NULL
+    apodo VARCHAR(50) NULL,
+    imagen_url VARCHAR(200)
 );
 
 -- entidad 3
@@ -28,5 +30,6 @@ CREATE TABLE misiones (
     descripcion VARCHAR(250),
     estado VARCHAR(20) NOT NULL,
     coste INT,
-    nivel_de_dificultad INT NOT NULL
+    nivel_de_dificultad INT NOT NULL,
+    imagen_url VARCHAR(200)
 );

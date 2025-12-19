@@ -10,7 +10,7 @@
   <!--LINK A CSS DE BULMA-->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
   <!--LINK A CSS PROPIO-->
-  <link rel="stylesheet" href="style.css"> 
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -18,54 +18,7 @@
     <div id="div-content-misiones" class="content">
       <!--ACA VAN A APARECER LAS CARPETAS/FOLDERS-->
     </div>
-    <script>
-      const API_URL = "http://localhost:3000/api/misiones/"
-      llenar_pagina()
-      async function llenar_pagina() {
-        const newDiv = document.getElementById("div-content-misiones")
-
-        try {
-          fetch(API_URL).then((response) => {
-            return response.json()
-          }).then((misiones) => {
-            misiones.forEach(mision => {
-              const newFolder = document.createElement("div")
-              newFolder.className = "folder"
-
-              const newFolderTab = document.createElement("div")
-              newFolderTab.className = "folder-tab"
-
-              const newMissionName = document.createElement("p")
-              newMissionName.innerText = mision.titulo
-
-              newFolderTab.appendChild(newMissionName)
-              newFolder.appendChild(newFolderTab)
-
-              const newFolderBody = document.createElement("div")
-              newFolderBody.className = "folder-content"
-
-              const newFolderBodyImg = document.createElement("img")
-              newFolderBodyImg.src = mision.imagen_url
-              newFolderBodyImg.alt = "imagen de la mision " + mision.id
-
-              const newFolderBodyDescription = document.createElement("p")
-              newFolderBodyDescription.innerText = mision.descripcion
-
-
-              newFolderBody.appendChild(newFolderBodyImg)
-              newFolderBody.appendChild(newFolderBodyDescription)
-              newFolder.appendChild(newFolderBody)
-
-              newDiv.appendChild(newFolder)
-            });
-          })
-        } catch (error) {
-          console.log(error)
-        }
-
-
-      }
-    </script>
+    <script src="misiones.js"></script>
 </body>
 
 </html>

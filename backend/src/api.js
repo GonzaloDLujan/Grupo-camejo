@@ -1,5 +1,5 @@
 import express from "express"
-
+import cors from "cors"
 import {
   getAllAgentes,
   getOneAgente,
@@ -22,6 +22,7 @@ const app = express()
 const port = 3000
 
 app.use(express.json());
+app.use(cors())
 
 app.get('/', (req, res) => {
   res.send('Hello World!asdasdasd')
@@ -217,7 +218,7 @@ app.put('/api/villanos/:id', async (req, res) => {
     edad,
     ocupacion,
     ubicacion,
-    estado,apodo
+    estado, apodo
   } = req.body
 
   if (nombre === undefined) {
@@ -295,14 +296,14 @@ app.post('/api/misiones', async (req, res) => {
 
   const {
     id_agente,
-    id_villano, 
-    fecha, 
-    titulo, 
-    descripcion, 
+    id_villano,
+    fecha,
+    titulo,
+    descripcion,
     estado,
     coste,
     dificultad
-} = req.body
+  } = req.body
 
   if ((await getOneMision(id)) !== undefined) {
     return res.status(409).send("The mission already exists");
@@ -359,14 +360,14 @@ app.put('/api/misiones/:id', async (req, res) => {
 
   const {
     id_agente,
-    id_villano, 
-    fecha, 
-    titulo, 
-    descripcion, 
+    id_villano,
+    fecha,
+    titulo,
+    descripcion,
     estado,
     coste,
     dificultad
-} = req.body
+  } = req.body
 
   if (id_agente === undefined) {
     return res.status(400).send("Agent ID not provided");

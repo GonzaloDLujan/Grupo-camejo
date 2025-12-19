@@ -95,7 +95,7 @@ body {
 .folder-content img {
     width: 100%;
     height: 75%;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .folder-content p {
@@ -122,15 +122,17 @@ body {
 /*-----MISION.HTML--------------------------*/
 .media {
     display: flex;
-    background-color: red;
     justify-content: space-between;
 }
 
 .media img {
-    border: 3px solid white;
     width: 100%;
     height: 100%;
     object-fit: contain;
 }
 
+#Agente:hover, #Villano:hover {
+    transform: scale(1.03);
+    transition: 0.2s;
+}
 /*-----------------------------------------*/
