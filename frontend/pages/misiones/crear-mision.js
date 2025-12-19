@@ -101,6 +101,7 @@ function crearMision() {
     })
     .then(data =>{
         console.log('Success:' + data);
+        window.location.replace("misiones.html")
     })
     .catch(error =>{
         console.log('Error: ' + error)
