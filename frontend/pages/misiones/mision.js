@@ -53,7 +53,13 @@ async function llenar_pagina() {
         cardVillano.addEventListener("click", () => {
             window.location.href = `villano.html?id=${mision.id_villano}`
         })
+
+        const buttonEditar = document.getElementById("boton-editar")
+        buttonEditar.addEventListener("click", () => {
+            window.location.href = `editar-mision.html?id=${mision.id}`
+        })
     } catch (error) {
         console.log(error)
     }
 }
+
