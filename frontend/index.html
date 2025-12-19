@@ -6,6 +6,28 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
+    <script>
+    document.addEventListener("mousemove", (e) => {
+        const ojos = document.querySelectorAll(".ojo");
+
+        ojos.forEach(ojo => {
+            const rect = ojo.getBoundingClientRect();
+            const ojoX = rect.left + rect.width / 2;
+            const ojoY = rect.top + rect.height / 2;
+
+            const dx = e.clientX - ojoX;
+            const dy = e.clientY - ojoY;
+
+            const angle = Math.atan2(dy, dx);
+            const max = 8;
+
+            const x = Math.cos(angle) * max;
+            const y = Math.sin(angle) * max;
+
+            ojo.style.transform = `translate(${x}px, ${y}px)`;
+        });
+    });
+    </script>
 <body>
     <header>
         <h1>Agencia Secreta</h1>
@@ -15,6 +37,13 @@
         <a href="villanos.html"><button>Villanos</button></a>
     </nav>
     </header>
+
+    <div class="monograma">
+        <img src="images/mayor.jpeg">
+        <div class="ojo ojo-izq"></div>
+        <div class="ojo ojo-der"></div>
+    </div>
+
     <main>
         <div class="creadores">
             <h2>Quienes somos</h2>

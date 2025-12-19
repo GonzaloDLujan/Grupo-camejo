@@ -129,3 +129,29 @@ form button:hover,
 #listaAgentes button:last-of-type:hover {
     background-color: #bb2d3b;
 }
+.monograma {
+    position: relative;
+    width: 600px;
+    margin: 30px auto;
+}
+
+.monograma img {
+    width: 100%;
+}
+
+.ojo {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    background: rgb(4, 4, 55);
+    border-radius: 50%;
+    top: 140px;
+}
+
+.ojo-izq {
+    left: 310px;
+}
+
+.ojo-der {
+    left: 422px;
+}
