@@ -9,7 +9,7 @@
     <!--LINK A CSS DE BULMA-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
     <!--LINK A CSS PROPIO-->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
 
 </head>
 
@@ -17,7 +17,14 @@
     <div class="container">
         <div id="content-mision" class="content">
             <div class="card">
-                <div class="card-image">
+                <div id="img-mision"class="card-image">
+                    <div id="boton-editar">
+                        <button class="button is-medium">
+                            <span class="icon">
+                                <i class="fab fa-twitter">✏️</i>
+                            </span>
+                        </button>
+                    </div>
                     <figure class="image is-4by3">
                         <img id="Img-Grande" />
                     </figure>
@@ -37,7 +44,7 @@
                             <p id="Nombre-Villano"></p>
                         </div>
                     </div>
-
+                    
                     <div class="content">
                         <p id="Descripcion"></p>
                     </div>

@@ -135,4 +135,15 @@ body {
     transform: scale(1.03);
     transition: 0.2s;
 }
+
+#img-mision{
+    position: relative;
+}
+
+#boton-editar{
+    
+    position: absolute;
+    z-index: 10;
+}
+
 /*-----------------------------------------*/
