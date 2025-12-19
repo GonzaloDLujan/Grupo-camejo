@@ -10,63 +10,62 @@
   <!--LINK A CSS DE BULMA-->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
   <!--LINK A CSS PROPIO-->
-  <link rel="stylesheet" href="misiones.html"> <!--CSS de elementos únicos de la pagina-->
-  <link rel="stylesheet" href="style.css"> <!--CSS de elementos comunes de las paginas-->
+  <link rel="stylesheet" href="style.css"> 
 </head>
 
 <body>
-
-  <div class="page-content">
-    <!--HEADER DE LA PAGINA-->
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-
-      <div id="navbarBasicExample" class="navbar-menu">
-        <div class="navbar-start">
-          <a class="navbar-item" href="agentes.html">
-            AGENTES
-          </a>
-          <a class="navbar-item" href="misiones.html">
-            MISIONES
-          </a>
-          <a class="navbar-item" href="villanos.html">
-            VILLANOS
-          </a>
-        </div>
-
-
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <a href="principal.html">
-              <img class="logo" src="../images/logo.png" alt="logo.png">
-            </a>
-          </div>
-        </div>
-      </div>
-    </nav>
-    <div class="parrafo">
-      <p>MISIONES</p>
+  <div class="container">
+    <div id="div-content-misiones" class="content">
+      <!--ACA VAN A APARECER LAS CARPETAS/FOLDERS-->
     </div>
-  </div>
-  <footer class="footer">
-    <div class="content has-text-centered">
-      <p>
-        O.W.C.A is a registered product by Disney CC 2025
-      </p>
-      <div class="footer-icons">
-        <a href="https://www.instagram.com/dan.povenmire/" target="_blank" rel="noopener noreferrer">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/2048px-Instagram_logo_2022.svg.png"
-            width="30px">
-        </a>
-        <a href="https://x.com/DanPovenmire" target="_blank" rel="noopener noreferrer">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/X_logo_2023.svg/250px-X_logo_2023.svg.png"
-            width="30px">
-        </a>
-      </div>
-    </div>
-  </footer>
+    <script>
+      const API_URL = "http://localhost:3000/api/misiones/"
+      llenar_pagina()
+      async function llenar_pagina() {
+        const newDiv = document.getElementById("div-content-misiones")
+
+        try {
+          fetch(API_URL).then((response) => {
+            return response.json()
+          }).then((misiones) => {
+            misiones.forEach(mision => {
+              const newFolder = document.createElement("div")
+              newFolder.className = "folder"
+
+              const newFolderTab = document.createElement("div")
+              newFolderTab.className = "folder-tab"
+
+              const newMissionName = document.createElement("p")
+              newMissionName.innerText = mision.titulo
+
+              newFolderTab.appendChild(newMissionName)
+              newFolder.appendChild(newFolderTab)
+
+              const newFolderBody = document.createElement("div")
+              newFolderBody.className = "folder-content"
+
+              const newFolderBodyImg = document.createElement("img")
+              newFolderBodyImg.src = mision.imagen_url
+              newFolderBodyImg.alt = "imagen de la mision " + mision.id
+
+              const newFolderBodyDescription = document.createElement("p")
+              newFolderBodyDescription.innerText = mision.descripcion
 
 
+              newFolderBody.appendChild(newFolderBodyImg)
+              newFolderBody.appendChild(newFolderBodyDescription)
+              newFolder.appendChild(newFolderBody)
+
+              newDiv.appendChild(newFolder)
+            });
+          })
+        } catch (error) {
+          console.log(error)
+        }
+
+
+      }
+    </script>
 </body>
 
 </html>
