@@ -1,0 +1,26 @@
+services:
+  database:
+    image: postgres:17-alpine3.22
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./database/init:/docker-entrypoint-initdb.d/
+    environment:
+      POSTGRES_USER: testUser
+      POSTGRES_PASSWORD: testPass
+      POSTGRES_DB: testDb
+
+  api:
+    build: ./backend
+    ports:
+      - "3000:3000"
+    environment:
+      PORT: 3000
+
+  web:
+    image: httpd:alpine
+    container_name: apache_httpd
+    ports:
+      - "8080:80"
+    volumes:
+      - ./frontend/:/usr/local/apache2/htdocs/:ro
