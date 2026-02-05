@@ -73,10 +73,10 @@ async function getOneMision(id) {
     return result.rows[0];
 }
 
-async function postMision(id_agente, id_villano, fecha, titulo, descripcion, estado, coste, dificultad) {
+async function postMision(id_agente, id_villano, imagen_url, titulo, descripcion, estado, coste, dificultad) {
     const result = await dbClient.query(
-        'INSERT INTO misiones (id_agente, id_villano, fecha, titulo, descripcion, estado, coste, dificultad) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
-        [id_agente, id_villano, fecha, titulo, descripcion, estado, coste, dificultad]);
+        'INSERT INTO misiones (id_agente, id_villano, imagen_url, titulo, descripcion, estado, coste, nivel_de_dificultad) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
+        [id_agente, id_villano, imagen_url, titulo, descripcion, estado, coste, dificultad]);
 
     if (result.rowCount === 0) {
         return undefined;
@@ -94,10 +94,10 @@ async function postMision(id_agente, id_villano, fecha, titulo, descripcion, est
     };
 }
 
-async function putMision(id, id_agente, id_villano, fecha, titulo, descripcion, estado, coste, dificultad) {
+async function putMision(id, id_agente, id_villano, imagen_url, titulo, descripcion, estado, coste, dificultad) {
     const result = await dbClient.query(
-        'UPDATE misiones SET id_agente = $2, id_villano = $3, fecha = $4, titulo = $5, descripcion = $6, estado = $7, coste = $8, dificultad = $9 WHERE id = $1',
-        [id, id_agente, id_villano, fecha, titulo, descripcion, estado, coste, dificultad]);
+        'UPDATE misiones SET id_agente = $2, id_villano = $3, imagen_url = $4, titulo = $5, descripcion = $6, estado = $7, coste = $8, nivel_de_dificultad = $9 WHERE id = $1',
+        [id, id_agente, id_villano, imagen_url, titulo, descripcion, estado, coste, dificultad]);
 
     if (result.rowCount === 0) {
         return undefined;
@@ -107,7 +107,7 @@ async function putMision(id, id_agente, id_villano, fecha, titulo, descripcion, 
         id: id,
         id_agente: id_agente,
         id_villano: id_villano,
-        fecha: fecha,
+        imagen_url:imagen_url,
         titulo: titulo,
         descripcion: descripcion,
         estado: estado,
