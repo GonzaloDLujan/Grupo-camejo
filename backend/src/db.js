@@ -6,7 +6,7 @@ import { Pool } from "pg"
 const dbClient = new Pool({
     user: 'postgres',
     port: 5432,
-    host: 'localhost',
+    host: 'database',
     database: 'agencia',
     password: 'postgres'
 });

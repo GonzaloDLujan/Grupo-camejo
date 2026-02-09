@@ -24,8 +24,8 @@ CREATE TABLE villanos (
 -- entidad 3
 CREATE TABLE misiones (
     id SERIAL PRIMARY KEY,
-    id_agente INT REFERENCES agente(id),
-    id_villano INT NOT NULL REFERENCES villano(id),
+    id_agente INT REFERENCES agentes(id),
+    id_villano INT NOT NULL REFERENCES villanos(id),
     titulo VARCHAR(100) NOT NULL,
     descripcion VARCHAR(250),
     estado VARCHAR(20) NOT NULL,

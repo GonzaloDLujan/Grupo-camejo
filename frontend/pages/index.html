@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Agencia Secreta</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
-    <script>
+<script>
     document.addEventListener("mousemove", (e) => {
         const ojos = document.querySelectorAll(".ojo");
 
@@ -27,17 +28,10 @@
             ojo.style.transform = `translate(${x}px, ${y}px)`;
         });
     });
-    </script>
-<body>
-    <header>
-        <h1>Agencia Secreta</h1>
-    <nav>
-        <a href="agentes.html"><button>Agentes</button></a>
-        <a href="misiones.html"><button>Misiones</button></a>
-        <a href="villanos.html"><button>Villanos</button></a>
-    </nav>
-    </header>
+</script>
 
+<body>
+    <div id="navbar"></div>
     <div class="monograma">
         <img src="images/mayor.jpeg">
         <div class="ojo ojo-izq"></div>
@@ -50,41 +44,45 @@
             <p>
                 Bienvenidos a la O.W.C.A. — Organization Without A Cool Acronym
 
-La Organization Without A Cool Acronym (Organización Sin un Acrónimo Genial) es una agencia altamente secreta dedicada a mantener la paz, la seguridad y el equilibrio global… con la ayuda de agentes animales altamente entrenados. Sí, lo leíste bien: animales espías.
+                La Organization Without A Cool Acronym (Organización Sin un Acrónimo Genial) es una agencia altamente
+                secreta dedicada a mantener la paz, la seguridad y el equilibrio global… con la ayuda de agentes
+                animales altamente entrenados. Sí, lo leíste bien: animales espías.
 
-Fundada para contrarrestar las amenazas más inusuales del mundo moderno, la O.W.C.A. combina tecnología de punta, estrategia encubierta y un toque de humor involuntario para frustrar a los villanos más extravagantes del planeta. Desde platijas espías hasta ornitorrincos expertos en combate, nuestros agentes son tan adorables como letales (bueno, más o menos).
+                Fundada para contrarrestar las amenazas más inusuales del mundo moderno, la O.W.C.A. combina tecnología
+                de punta, estrategia encubierta y un toque de humor involuntario para frustrar a los villanos más
+                extravagantes del planeta. Desde platijas espías hasta ornitorrincos expertos en combate, nuestros
+                agentes son tan adorables como letales (bueno, más o menos).
 
-Nuestra misión:
+                Nuestra misión:
 
-“Proteger al mundo… una operación secreta a la vez.”
+                “Proteger al mundo… una operación secreta a la vez.”
 
-Qué hacemos:
+                Qué hacemos:
 
-Operaciones encubiertas de alto secreto.
+                Operaciones encubiertas de alto secreto.
 
-Desmantelamiento de planes malévolos (especialmente los que incluyen máquinas con nombres raros).
+                Desmantelamiento de planes malévolos (especialmente los que incluyen máquinas con nombres raros).
 
-Entrenamiento y supervisión de agentes animales bajo identidad civil.
+                Entrenamiento y supervisión de agentes animales bajo identidad civil.
 
-Coordinación interdepartamental con otras agencias de dudoso acrónimo.
+                Coordinación interdepartamental con otras agencias de dudoso acrónimo.
 
-Nuestro lema:
+                Nuestro lema:
 
-“No necesitamos un nombre genial, solo resultados.”
+                “No necesitamos un nombre genial, solo resultados.”
 
-¿Interesado en unirte?
-Si eres un animal con habilidades especiales, un fuerte sentido del deber y un gusto por los sombreros de fieltro, ¡la O.W.C.A. podría ser tu próximo hogar!
+                ¿Interesado en unirte?
+                Si eres un animal con habilidades especiales, un fuerte sentido del deber y un gusto por los sombreros
+                de fieltro, ¡la O.W.C.A. podría ser tu próximo hogar!
 
-🕶️ O.W.C.A. — Porque incluso las misiones serias merecen un poco de diversión.
+                🕶️ O.W.C.A. — Porque incluso las misiones serias merecen un poco de diversión.
             </p>
         </div>
+
+        <div id="footer"></div>
     </main>
-    <footer>
-        <p>
-            2c 2025, Trabajo Practico Final Facultad de Ingenieria de la Universidad de Buenos Aires
-        </p>
-    </footer>
-    <script>
-    </script>
+    <script src="footer.js"></script>
+    <script src="navbar.js"></script>
 </body>
+
 </html>
