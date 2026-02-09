@@ -1,15 +1,21 @@
-.PHONY: start-db stop-db start-backend run-backend
+.PHONY: start-db stop-db start-api stop-api start-frontend stop-frontend run-backend stop-backend run-project stop-project
 
-start-db:
-	docker compose up --build
+start-db: docker compose up --build -d database
 
-stop-containers:
-	docker compose down -v
+stop-db: docker compose down database
 
-stop-db:
-	docker compose down
+start-api: docker compose up --build -d api
 
-start-backend:
-	cd backend && npm run dev
+stop-api: docker compose down api
 
-run-backend: start-db start-backend
+start-frontend: docker compose up --build -d web
+
+stop-frontend: docker compose down web
+
+run-backend: start-db start-api
+
+stop-backend: stop-db stop-api
+
+run-project: docker compose up --build
+
+stop-project: docker compose down -v
