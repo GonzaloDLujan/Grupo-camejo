@@ -1,26 +1,33 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Misiones</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Misiones</title>
+  <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+
+  <!--LINK A CSS DE BULMA-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+  <!--LINK A CSS PROPIO-->
+  <link rel="stylesheet" href="../style.css">
 </head>
+
 <body>
-    <header>
-        <h1>Misiones</h1>
-        <nav>
-            <a href="index.html"><button>Inicio</button></a>
-            <a href="agentes.html"><button>Agentes</button></a>
-            <a href="villanos.html"><button>Villanos</button></a>
-        </nav>
-    </header>
-    <main>
-        <p>Agregar aca misiones.</p>
-    </main>
-    <footer>
-    <p>
-        2c 2025, Trabajo Practico Final Facultad de Ingenieria de la Universidad de Buenos Aires
-    </p>
-    </footer>
+  <div id="navbar"></div>
+  <div class="container">
+    <div class="boton-crear">
+      <a class="button is-primary" href="crear-mision.html">+</a>
+    </div>
+    <div id="div-content-misiones" class="content">
+      <!--ACA VAN A APARECER LAS CARPETAS/FOLDERS-->
+    </div>
+  </div>
+  <div id="footer"></div>
+
+  <script src="../footer.js"></script>
+  <script src="misiones.js"></script>
+  <script src="../navbar.js"></script>
 </body>
+
 </html>

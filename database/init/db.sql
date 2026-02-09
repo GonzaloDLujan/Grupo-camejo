@@ -1,16 +1,16 @@
 -- entidad 1
-CREATE TABLE agente (
+CREATE TABLE agentes (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL,
     especie VARCHAR(50) NOT NULL,
-    fecha_de_ingreso DATE,
+    fecha_de_ingreso DATE NOT NULL,
     estado VARCHAR(20) NOT NULL,
     nivel_de_habilidad INT NOT NULL,
     imagen_url VARCHAR(200)
 );
 
 -- entidad 2
-CREATE TABLE villano (
+CREATE TABLE villanos (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL,
     edad INT NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE villano (
 );
 
 -- entidad 3
-CREATE TABLE mision (
+CREATE TABLE misiones (
     id SERIAL PRIMARY KEY,
     id_agente INT REFERENCES agente(id),
     id_villano INT NOT NULL REFERENCES villano(id),
