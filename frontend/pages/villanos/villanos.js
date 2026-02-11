@@ -12,6 +12,8 @@ async function llenar_pagina() {
         fetch(API_URL_VILLANOS).then((response) => {
             return response.json()
         }).then((villanos) => {
+            console.log(villanos);
+            
             villanos.forEach(villano => {
                 const newFolder = document.createElement("div")
                 newFolder.className = "folder"

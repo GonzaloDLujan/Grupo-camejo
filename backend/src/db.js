@@ -143,10 +143,10 @@ async function getOneVillano(id) {
     return result.rows[0];
 }
 
-async function postVillano(nombre, edad, ocupacion, ubicacion, estado, apodo) {
+async function postVillano(nombre, edad, ocupacion, ubicacion, estado, apodo, imagen_url) {
     const result = await dbClient.query(
-        'INSERT INTO villanos (nombre, edad, ocupacion, ubicacion, estado, apodo) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
-        [nombre, edad, ocupacion, ubicacion, estado, apodo]);
+        'INSERT INTO villanos (nombre, edad, ocupacion, ubicacion, estado, apodo, imagen_url) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *',
+        [nombre, edad, ocupacion, ubicacion, estado, apodo, imagen_url]);
 
     if (result.rowCount === 0) {
         return undefined;
@@ -159,7 +159,8 @@ async function postVillano(nombre, edad, ocupacion, ubicacion, estado, apodo) {
         ocupacion: result.rows[0].ocupacion,
         ubicacion: result.rows[0].ubicacion,
         estado: result.rows[0].estado,
-        apodo: result.rows[0].apodo
+        apodo: result.rows[0].apodo,
+        imagen_url: result.rows[0].imagen_url
     };
 }
 
