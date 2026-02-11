@@ -35,7 +35,7 @@ function crearNavbar(){
     divLogo.className = "navbar-end"
     
     const aLogo = document.createElement("a")
-    aLogo.href = "/pages/principal.html"
+    aLogo.href = "/pages/index.html"
 
     const imgLogo = document.createElement("img")
     imgLogo.src = "/images/logo.png"
