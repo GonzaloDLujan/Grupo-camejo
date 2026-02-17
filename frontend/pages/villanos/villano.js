@@ -7,6 +7,7 @@ async function llenar_pagina() {
     try {
         const villano = await fetch(API_URL).then(r => r.json())
 
+        
         //VILLANO
         const img = document.getElementById("img-Grande")
         img.src = villano.imagen_url
