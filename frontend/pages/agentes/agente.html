@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Perfil del Agente</title>
+    <link rel="icon" type="image/x-icon" href="../../images/favicon.ico">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+<div id="navbar"></div>
+
+<div class="container mt-5">
+    <div class="card">
+
+        <div class="card-image">
+            <figure class="image is-4by3">
+                <img id="img-Grande">
+            </figure>
+        </div>
+
+        <div class="card-content">
+
+            <button id="boton-editar" class="button is-warning mb-4">
+                ✏️ Editar
+            </button>
+
+            <h2 id="nombre" class="title"></h2>
+
+            <div class="content">
+
+                <p><strong>Especie:</strong> <span id="especie"></span></p>
+
+                <p><strong>Fecha de ingreso:</strong> <span id="fecha"></span></p>
+
+                <p><strong>Estado:</strong> <span id="estado"></span></p>
+
+                <p><strong>Nivel de habilidad:</strong> <span id="nivel"></span></p>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div id="footer"></div>
+
+<script src="../navbar.js"></script>
+<script src="agente.js"></script>
+<script src="../footer.js"></script>
+
+</body>
+
+</html>

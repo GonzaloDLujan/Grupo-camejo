@@ -11,7 +11,8 @@ function crearAgente() {
         especie: document.getElementById("especie").value,
         fecha_de_ingreso: document.getElementById("fecha").value,
         estado: document.getElementById("estado").value,
-        nivel_de_habilidad: document.getElementById("nivel").value
+        nivel_de_habilidad: document.getElementById("nivel").value,
+        imagen_url: document.getElementById("imagen").value
     }
     
     if (!nuevoAgente.nombre) {
