@@ -1,77 +1,49 @@
-const API_URL_VILLANOS = "http://localhost:3000/api/villanos/"
-
+const API_URL_VILLANOS = "http://localhost:3000/api/villanos"
 
 llenar_pagina()
 
-
+const contenedor = document.getElementById("galeria-villanos");
 async function llenar_pagina() {
-    document.getElementById("div-content-villanos").innerHTML = ""
+    fetch(API_URL_VILLANOS).then((response) => {
+        return response.json()
+    }).then((villanos) => {
+        villanos.forEach(villano => {
+            const col = document.createElement("div");
+            col.className = "column is-narrow has-text-centered";
+            //Si el url no empieza con http se lo agrega
+            let img_url = villano.imagen_url;
 
-    const newDiv = document.getElementById("div-content-villanos")
-    try {
-        fetch(API_URL_VILLANOS).then((response) => {
-            return response.json()
-        }).then((villanos) => {
-            console.log(villanos);
-            
-            villanos.forEach(villano => {
-                const newFolder = document.createElement("div")
-                newFolder.className = "folder"
+            if (!img_url.startsWith("http")) {
+                img_url = "https://" + img_url;
+            }
 
-                // BOTÓN BORRAR
-                const deleteBtn = document.createElement("button")
-                deleteBtn.className = "button is-danger"
-                deleteBtn.innerText = "X"
+            col.innerHTML = `
+                    <div class="villano-card" onclick="window.location.href='villano.html?id=${villano.id}'">
+                        <img src="${img_url}" alt="imagen del villano ${villano.id}" class="is-profile-img">
+                        <p class="mt-3 is-size-5 has-text-weight-bold is-uppercase">${villano.apodo}</p>
+                    </div>
+                `;
+            const deleteBtn = document.createElement("button")
+            deleteBtn.className = "button delete-button"
+            deleteBtn.innerText = "X"
 
-                // acción
-                deleteBtn.addEventListener("click", (e) => {
-                    e.stopPropagation() //asi no entra al villano en si
-                    borrarVillano(villano.id)
-                })
+            // acción
+            deleteBtn.addEventListener("click", (e) => {
+                e.stopPropagation() //asi no entra al villano en si
+                console.log(villano.id)
+                borrarVillano(villano.id)
+            })
 
-                newFolder.appendChild(deleteBtn)
+            contenedor.appendChild(col);
+            contenedor.appendChild(deleteBtn)
 
-                const newFolderTab = document.createElement("div")
-                newFolderTab.className = "folder-tab"
-
-                const newVillainName = document.createElement("p")
-                newVillainName.innerText = villano.nombre
-
-                newFolderTab.appendChild(newVillainName)
-                newFolder.appendChild(newFolderTab)
-
-                const newFolderBody = document.createElement("div")
-                newFolderBody.className = "folder-content"
-
-                const newFolderBodyImg = document.createElement("img")
-                newFolderBodyImg.src = villano.imagen_url
-                newFolderBodyImg.alt = "imagen de la villano " + villano.id
-
-                const newFolderBodyDescription = document.createElement("p")
-                newFolderBodyDescription.innerText = villano.edad
-
-
-                newFolderBody.appendChild(newFolderBodyImg)
-                newFolderBody.appendChild(newFolderBodyDescription)
-                newFolder.appendChild(newFolderBody)
-
-                newDiv.appendChild(newFolder)
-
-
-                newFolder.style.cursor = "pointer"
-                newFolder.addEventListener("click", () => {
-                    window.location.href = `villano.html?id=${villano.id}`
-                })
-            });
-        })
-    } catch (error) {
-        console.log(error)
+        });
     }
-
-
+    )
 }
 
 async function borrarVillano(id) {
-    fetch(API_URL_VILLANOS + id, { method: 'DELETE' }).then(
-        llenar_pagina)
+    console.log(id)
+    fetch(API_URL_VILLANOS + "/" + id, { method: 'DELETE' }).then(
+        window.location.reload())
 }
