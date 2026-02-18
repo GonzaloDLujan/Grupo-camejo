@@ -58,7 +58,8 @@ app.post('/api/agentes', async (req, res) => {
     especie,
     fecha_de_ingreso,
     estado,
-    nivel_de_habilidad
+    nivel_de_habilidad,
+    imagen_url
   } = req.body;
 
   if (!nombre || !especie || !fecha_de_ingreso || !estado || !nivel_de_habilidad) {
@@ -70,7 +71,8 @@ app.post('/api/agentes', async (req, res) => {
     especie,
     fecha_de_ingreso,
     estado,
-    nivel_de_habilidad
+    nivel_de_habilidad,
+    imagen_url
   );
 
   if (!agente) {

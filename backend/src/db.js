@@ -23,8 +23,8 @@ async function getOneAgente(id) {
     return result.rows[0]
 }
 
-async function postAgente(nombre, especie, fecha_de_ingreso, estado, nivel_de_habilidad) {
-    const result = await dbClient.query('INSERT INTO agentes (nombre, especie, fecha_de_ingreso, estado, nivel_de_habilidad) VALUES ($1, $2, $3, $4, $5) RETURNING *', [nombre, especie, fecha_de_ingreso, estado, nivel_de_habilidad])
+async function postAgente(nombre, especie, fecha_de_ingreso, estado, nivel_de_habilidad, imagen_url) {
+    const result = await dbClient.query('INSERT INTO agentes (nombre, especie, fecha_de_ingreso, estado, nivel_de_habilidad, imagen_url) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *', [nombre, especie, fecha_de_ingreso, estado, nivel_de_habilidad, imagen_url])
 
     if (result.rowCount === 0) {
         return undefined

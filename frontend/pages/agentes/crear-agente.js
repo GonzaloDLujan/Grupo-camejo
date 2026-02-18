@@ -13,7 +13,9 @@ function crearAgente() {
         estado: document.getElementById("estado").value,
         nivel_de_habilidad: document.getElementById("nivel").value,
         imagen_url: document.getElementById("imagen").value
+        
     }
+    alert(nuevoAgente.imagen_url);
     
     if (!nuevoAgente.nombre) {
         alert("Falta el Nombre")
@@ -44,7 +46,6 @@ function crearAgente() {
         alert("El Nivel debe estar entre 1 y 100")
         return
     }
-
     fetch(API_URL_AGENTES, {
         method: 'POST',
         headers: {
