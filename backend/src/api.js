@@ -169,7 +169,8 @@ app.post('/api/villanos', async (req, res) => {
     ocupacion,
     ubicacion,
     estado,
-    apodo
+    apodo,
+    imagen_url
   } = req.body
 
   if (nombre === undefined) {
@@ -196,7 +197,7 @@ app.post('/api/villanos', async (req, res) => {
     return res.status(400).send("Nickname not provided");
   }
 
-  const villano = await postVillano(nombre, edad, ocupacion, ubicacion, estado, apodo);
+  const villano = await postVillano(nombre, edad, ocupacion, ubicacion, estado, apodo, imagen_url);
 
   res.status(201).json(villano);
 });
