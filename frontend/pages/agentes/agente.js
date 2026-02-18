@@ -21,7 +21,7 @@ async function llenar_pagina() {
         // INFO
         const datos = document.getElementById("datos-agente")
         datos.innerText =
-            agente.nombre + " es un " + agente.especie +
+            agente.nombre + " el " + agente.especie +
             " con estado " + agente.estado +
             ", nivel de habilidad " + agente.nivel_de_habilidad +
             " e ingreso el " + agente.fecha_de_ingreso
