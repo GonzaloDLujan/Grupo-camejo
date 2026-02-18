@@ -38,6 +38,13 @@ body {
     margin-top: 10px;
 }
 
+.creadores {
+    background-color: #02012e;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
 /*MISIONES-----------------------------------------*/
 
 #div-content-misiones {
@@ -145,4 +152,30 @@ body {
     z-index: 10;
 }
 
+.monograma {
+    position: relative;
+    width: 600px;
+    margin: 30px auto;
+}
+
+.monograma img {
+    width: 100%;
+}
+
+.ojo {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    background: rgb(4, 4, 55);
+    border-radius: 50%;
+    top: 140px;
+}
+
+.ojo-izq {
+    left: 310px;
+}
+
+.ojo-der {
+    left: 422px;
+}
 /*-----------------------------------------*/
