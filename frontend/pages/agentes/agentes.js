@@ -1,74 +1,48 @@
-const API_URL_AGENTES = "http://localhost:3000/api/agentes/"
+const API_URL_AGENTES = "http://localhost:3000/api/agentes"
 
 llenar_pagina()
 
+const contenedor = document.getElementById("galeria-agentes");
 async function llenar_pagina() {
-    document.getElementById("div-content-agentes").innerHTML = ""
+    fetch(API_URL_AGENTES).then((response) => {
+        return response.json()
+    }).then((agentes) => {
+        agentes.forEach(agente => {
+            const col = document.createElement("div");
+            col.className = "column is-narrow has-text-centered";
+            //Si el url no empieza con http se lo agrega
+            let img_url = agente.imagen_url;
 
-    const newDiv = document.getElementById("div-content-agentes")
+            if (!img_url.startsWith("http")) {
+                img_url = "https://" + img_url;
+            }
 
-    try {
-        fetch(API_URL_AGENTES)
-            .then((response) => response.json())
-            .then((agentes) => {
-                console.log(agentes);
+            col.innerHTML = `
+                    <div class="agente-card" onclick="window.location.href='agente.html?id=${agente.id}'">
+                        <img src="${img_url}" alt="imagen del agente ${agente.id}" class="is-profile-img">
+                        <p class="mt-3 is-size-5 has-text-weight-bold is-uppercase">${agente.nombre}</p>
+                    </div>
+                `;
+            const deleteBtn = document.createElement("button")
+            deleteBtn.className = "button delete-button"
+            deleteBtn.innerText = "X"
 
-                agentes.forEach(agente => {
-                    const newFolder = document.createElement("div")
-                    newFolder.className = "folder"
-
-                    // BOTÓN BORRAR
-                    const deleteBtn = document.createElement("button")
-                    deleteBtn.className = "button is-danger"
-                    deleteBtn.innerText = "X"
-
-                    deleteBtn.addEventListener("click", (e) => {
-                        e.stopPropagation()
-                        borrarAgente(agente.id)
-                    })
-
-                    newFolder.appendChild(deleteBtn)
-
-                    const newFolderTab = document.createElement("div")
-                    newFolderTab.className = "folder-tab"
-
-                    const newAgentName = document.createElement("p")
-                    newAgentName.innerText = agente.nombre
-
-                    newFolderTab.appendChild(newAgentName)
-                    newFolder.appendChild(newFolderTab)
-
-                    const newFolderBody = document.createElement("div")
-                    newFolderBody.className = "folder-content"
-
-                    const img = document.createElement("img")
-                    img.src = agente.imagen_url
-                    img.alt = "imagen del agente " + agente.id
-
-                    const info = document.createElement("p")
-                    info.innerText =
-                        "Especie: " + agente.especie +
-                        " | Estado: " + agente.estado +
-                        " | Nivel: " + agente.nivel_de_habilidad
-
-                    newFolderBody.appendChild(img)
-                    newFolderBody.appendChild(info)
-                    newFolder.appendChild(newFolderBody)
-
-                    newDiv.appendChild(newFolder)
-
-                    newFolder.style.cursor = "pointer"
-                    newFolder.addEventListener("click", () => {
-                        window.location.href = `agente.html?id=${agente.id}`
-                    })
-                })
+            // acción
+            deleteBtn.addEventListener("click", (e) => {
+                e.stopPropagation() //asi no entra al Agente en si
+                borrarAgente(agente.id)
             })
-    } catch (error) {
-        console.log(error)
+
+            contenedor.appendChild(col);
+            contenedor.appendChild(deleteBtn)
+
+        });
     }
+    )
 }
 
 async function borrarAgente(id) {
-    fetch(API_URL_AGENTES + id, { method: 'DELETE' })
-        .then(llenar_pagina)
+    console.log(id)
+    fetch(API_URL_AGENTES + "/" + id, { method: 'DELETE' }).then(
+        window.location.reload())
 }

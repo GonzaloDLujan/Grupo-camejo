@@ -15,16 +15,13 @@ async function llenar_pagina() {
         img.alt = "FOTO DEL AGENTE " + id
 
         // NOMBRE
-        const pNombre = document.getElementById("nombre")
-        pNombre.innerText = agente.nombre
+        document.getElementById("nombre").innerText = agente.nombre
 
         // INFO
-        const datos = document.getElementById("datos-agente")
-        datos.innerText =
-            agente.nombre + " es un " + agente.especie +
-            " con estado " + agente.estado +
-            ", nivel de habilidad " + agente.nivel_de_habilidad +
-            " e ingreso el " + agente.fecha_de_ingreso
+        document.getElementById("especie").innerText = agente.especie
+        document.getElementById("fecha").innerText = agente.fecha_de_ingreso.split("T")[0]
+        document.getElementById("estado").innerText = agente.estado
+        document.getElementById("nivel").innerText = agente.nivel_de_habilidad
 
         // BOTON EDITAR
         const buttonEditar = document.getElementById("boton-editar")
