@@ -42,8 +42,8 @@ function crearAgente() {
         return
     }
 
-    if (nuevoAgente.nivel_de_habilidad < 1 || nuevoAgente.nivel_de_habilidad > 100) {
-        alert("El Nivel debe estar entre 1 y 100")
+    if (nuevoAgente.nivel_de_habilidad < 1 || nuevoAgente.nivel_de_habilidad > 10) {
+        alert("El Nivel debe estar entre 1 y 10")
         return
     }
     fetch(API_URL_AGENTES, {
