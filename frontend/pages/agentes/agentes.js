@@ -37,5 +37,5 @@ async function llenar_pagina() {
 
 async function borrarAgente(id) {
     fetch(API_URL_AGENTES + "/" + id, { method: 'DELETE' }).then(
-        window.location.reload())
+        () => window.location.reload())
 }
