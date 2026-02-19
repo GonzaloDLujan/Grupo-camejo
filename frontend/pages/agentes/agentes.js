@@ -1,4 +1,5 @@
 const API_URL_AGENTES = "http://localhost:3000/api/agentes"
+const API_URL_MISION = "http://localhost:3000/api/misiones"
 
 llenar_pagina()
 
@@ -36,6 +37,25 @@ async function llenar_pagina() {
 }
 
 async function borrarAgente(id) {
-    fetch(API_URL_AGENTES + "/" + id, { method: 'DELETE' }).then(
-        window.location.reload())
+    const response = await fetch(API_URL_MISION)
+    const misiones = await response.json()
+    let agente_en_mision = false
+    let i = 0
+    let misiones_size = Object.keys(misiones).length
+
+
+    while (!agente_en_mision && i < misiones_size) {
+        if (misiones[i].id_agente == id) {
+            agente_en_mision = true
+        }
+        i++
+    }
+
+    if (agente_en_mision) {
+        alert("No se puede borrar el agente porque se encuentra en una mision")
+    } else {
+        fetch(API_URL_AGENTES + "/" + id, { method: 'DELETE' }).then(
+            () => window.location.reload())
+    }
+
 }

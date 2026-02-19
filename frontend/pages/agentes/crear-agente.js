@@ -15,7 +15,6 @@ function crearAgente() {
         imagen_url: document.getElementById("imagen").value
         
     }
-    alert(nuevoAgente.imagen_url);
     
     if (!nuevoAgente.nombre) {
         alert("Falta el Nombre")
