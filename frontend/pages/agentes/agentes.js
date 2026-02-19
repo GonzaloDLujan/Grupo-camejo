@@ -13,7 +13,7 @@ async function llenar_pagina() {
 
             col.innerHTML = `
                     <div class="agente-card" onclick="window.location.href='agente.html?id=${agente.id}'">
-                        <img src="${img_url}" alt="imagen del agente ${agente.id}" class="is-profile-img">
+                        <img src="${agente.imagen_url}" alt="imagen del agente ${agente.id}" class="is-profile-img">
                         <p class="mt-3 is-size-5 has-text-weight-bold is-uppercase">${agente.nombre}</p>
                     </div>
                 `;
