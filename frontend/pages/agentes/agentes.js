@@ -10,12 +10,6 @@ async function llenar_pagina() {
         agentes.forEach(agente => {
             const col = document.createElement("div");
             col.className = "column is-narrow has-text-centered";
-            //Si el url no empieza con http se lo agrega
-            let img_url = agente.imagen_url;
-
-            if (!img_url.startsWith("http")) {
-                img_url = "https://" + img_url;
-            }
 
             col.innerHTML = `
                     <div class="agente-card" onclick="window.location.href='agente.html?id=${agente.id}'">
@@ -42,7 +36,6 @@ async function llenar_pagina() {
 }
 
 async function borrarAgente(id) {
-    console.log(id)
     fetch(API_URL_AGENTES + "/" + id, { method: 'DELETE' }).then(
         window.location.reload())
 }
