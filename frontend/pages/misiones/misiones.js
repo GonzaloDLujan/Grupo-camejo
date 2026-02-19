@@ -65,6 +65,6 @@ async function llenar_pagina() {
 
     async function borrarMision(id) {
         fetch(API_URL_MISION + id, { method: 'DELETE' }).then(
-            llenar_pagina)
+            () => window.location.reload())
     }
 }

@@ -45,5 +45,5 @@ async function llenar_pagina() {
 async function borrarVillano(id) {
     console.log(id)
     fetch(API_URL_VILLANOS + "/" + id, { method: 'DELETE' }).then(
-        window.location.reload())
+        () => window.location.reload())
 }
