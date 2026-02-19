@@ -10,16 +10,10 @@ async function llenar_pagina() {
         villanos.forEach(villano => {
             const col = document.createElement("div");
             col.className = "column is-narrow has-text-centered";
-            //Si el url no empieza con http se lo agrega
-            let img_url = villano.imagen_url;
-
-            if (!img_url.startsWith("http")) {
-                img_url = "https://" + img_url;
-            }
 
             col.innerHTML = `
                     <div class="villano-card" onclick="window.location.href='villano.html?id=${villano.id}'">
-                        <img src="${img_url}" alt="imagen del villano ${villano.id}" class="is-profile-img">
+                        <img src="${villano.imagen_url}" alt="imagen del villano ${villano.id}" class="is-profile-img">
                         <p class="mt-3 is-size-5 has-text-weight-bold is-uppercase">${villano.apodo}</p>
                     </div>
                 `;
@@ -43,7 +37,6 @@ async function llenar_pagina() {
 }
 
 async function borrarVillano(id) {
-    console.log(id)
     fetch(API_URL_VILLANOS + "/" + id, { method: 'DELETE' }).then(
         window.location.reload())
 }
