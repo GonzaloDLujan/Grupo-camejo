@@ -11,16 +11,10 @@ async function llenar_pagina() {
         agentes.forEach(agente => {
             const col = document.createElement("div");
             col.className = "column is-narrow has-text-centered";
-            //Si el url no empieza con http se lo agrega
-            let img_url = agente.imagen_url;
-
-            if (!img_url.startsWith("http")) {
-                img_url = "https://" + img_url;
-            }
 
             col.innerHTML = `
                     <div class="agente-card" onclick="window.location.href='agente.html?id=${agente.id}'">
-                        <img src="${img_url}" alt="imagen del agente ${agente.id}" class="is-profile-img">
+                        <img src="${agente.imagen_url}" alt="imagen del agente ${agente.id}" class="is-profile-img">
                         <p class="mt-3 is-size-5 has-text-weight-bold is-uppercase">${agente.nombre}</p>
                     </div>
                 `;
