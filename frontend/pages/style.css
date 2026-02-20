@@ -199,12 +199,12 @@ a{
     display: block;
 }
 
-.villano-card {
+.cards {
     transition: all 0.3s ease;
     cursor: pointer;
 }
 
-.villano-card:hover {
+.cards:hover {
     transform: translateY(-5px);
 }
 
