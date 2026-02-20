@@ -1,0 +1,225 @@
+html,
+body {
+    height: 100%;
+    /* Hace que el body ocupe toda la pantalla */
+    margin: 0;
+    /* Quita márgenes por defecto */
+    display: flex;
+    flex-direction: column;
+    /* Organiza todo verticalmente */
+}
+
+a{
+    text-decoration: none;
+}
+
+.page-content {
+    flex: 1;
+    /* Empuja el footer hacia abajo */
+}
+
+.navbar {
+    background-color: hsla(221, 14%, 11%, 1);
+}
+
+.parrafo {
+    padding: 10px;
+}
+
+.footer {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.footer-icons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    /* espacio entre iconos */
+    margin-top: 10px;
+}
+
+.creadores {
+    background-color: #02012e;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+/*MISIONES-----------------------------------------*/
+
+#div-content-misiones {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    justify-items: center;
+}
+
+.folder {
+    width: 400px;
+    height: 400px;
+
+    background-image: url("https://freesvg.org/img/Folder-1.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    position: relative;
+    display: flex;
+    justify-content: center;
+    /* centro horizontal */
+    align-items: center;
+
+}
+
+/*Nombre De Mision*/
+.folder-tab {
+    position: absolute;
+    top: 13%;
+    left: 10%;
+
+    background: transparent;
+    /* la imagen ya está abajo */
+    padding: 5px 10px;
+}
+
+.folder-tab p {
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    margin: 0;
+}
+
+.folder-content {
+    margin-top: 20%;
+    height: 60%;
+    width: 70%;
+
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.folder-content img {
+    width: 100%;
+    height: 75%;
+    object-fit: contain;
+}
+
+.folder-content p {
+    height: 100px;
+    margin: 0;
+    padding: 8px;
+    overflow: hidden;
+}
+
+.mission-button {
+    height: 100%;
+    width: 100%;
+    color: #D3DAD9;
+    text-decoration: none;
+}
+
+.folder:hover {
+    transform: scale(1.03);
+    transition: 0.2s;
+}
+
+/*-----------------------------------------*/
+
+/*-----MISION.HTML--------------------------*/
+.media {
+    display: flex;
+    justify-content: space-between;
+}
+
+.media img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+#Agente:hover, #Villano:hover {
+    transform: scale(1.03);
+    transition: 0.2s;
+}
+
+#img-mision{
+    position: relative;
+}
+
+#boton-editar{
+    position: absolute;
+    z-index: 10;
+}
+
+/*----------------------------------------------------*/
+
+/*INDEX.HTML*/
+
+.monograma {
+    position: relative;
+    width: 600px;
+    margin: 30px auto;
+}
+
+.monograma img {
+    width: 100%;
+}
+
+.ojo {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    background: rgb(4, 4, 55);
+    border-radius: 50%;
+    top: 140px;
+}
+
+.ojo-izq {
+    left: 310px;
+}
+
+.ojo-der {
+    left: 422px;
+}
+/*-----------------------------------------*/
+
+/*VILLANOS---------------------------*/
+.is-profile-img {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #f14668;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    display: block;
+}
+
+.cards {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.cards:hover {
+    transform: translateY(-5px);
+}
+
+.add-circle {
+    border: 4px dashed #ccc;
+    color: #ccc;
+}
+
+.add-circle:hover {
+    border-color: #f14668;
+    color: #f14668;
+}
+
+.delete-button{
+    height: 32px;
+    width: 32px;
+}
+/*-----------------------------------------------------*/

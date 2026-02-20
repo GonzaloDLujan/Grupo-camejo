@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mision</title>
+
+    <!--LINK A CSS DE BULMA-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+    <!--LINK A CSS PROPIO-->
+    <link rel="stylesheet" href="../style.css">
+
+</head>
+
+<body>
+    <div id="navbar"></div>
+    <div class="container">
+        <div id="content-mision" class="content">
+            <div class="card">
+                <div id="img-mision" class="card-image">
+                    <div>
+                        <button id="boton-editar" class="button is-medium">
+                            <span class="icon">
+                                <i class="fab fa-twitter">✏️</i>
+                            </span>
+                        </button>
+                    </div>
+                    <figure class="image is-4by3">
+                        <img id="Img-Grande" />
+                    </figure>
+                </div>
+                <div class="card-content">
+                    <div class="media">
+                        <div id="Agente" class="media-left">
+                            <figure class="image is-128x128">
+                                <img id="Img-Agente" />
+                            </figure>
+                            <p id="Nombre-Agente"></p>
+                        </div>
+                        <div id="Villano" class="media-right">
+                            <figure class="image is-128x128">
+                                <img id="Img-Villano" />
+                            </figure>
+                            <p id="Nombre-Villano"></p>
+                        </div>
+                    </div>
+
+                    <div class="content">
+                        <p id="Descripcion"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer"></div>
+
+    <script src="../footer.js"></script>
+    <script src="mision.js"></script>
+    <script src="../navbar.js"></script>
+</body>
+</html>
