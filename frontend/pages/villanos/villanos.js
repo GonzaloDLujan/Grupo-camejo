@@ -1,5 +1,5 @@
 const API_URL_VILLANOS = "http://localhost:3000/api/villanos"
-
+const API_URL_MISION = "http://localhost:3000/api/misiones"
 llenar_pagina()
 
 const contenedor = document.getElementById("galeria-villanos");
@@ -37,6 +37,25 @@ async function llenar_pagina() {
 }
 
 async function borrarVillano(id) {
-    fetch(API_URL_VILLANOS + "/" + id, { method: 'DELETE' }).then(
-        () => window.location.reload())
+    const response = await fetch(API_URL_MISION)
+    const misiones = await response.json()
+    let villano_en_mision = false
+    let i = 0
+    let misiones_size = Object.keys(misiones).length
+
+
+    while (!villano_en_mision && i < misiones_size) {
+        if (misiones[i].id_villano == id) {
+            villano_en_mision = true
+        }
+        i++
+    }
+
+    if (villano_en_mision) {
+        alert("No se puede borrar el Villano porque se encuentra en una mision")
+    } else {
+        fetch(API_URL_VILLANOS + "/" + id, { method: 'DELETE' }).then(
+            () => window.location.reload())
+    }
+
 }
