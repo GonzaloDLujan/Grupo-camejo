@@ -24,7 +24,7 @@ async function llenar_pagina() {
         //AGENTE
         const imgAgente = document.getElementById("Img-Agente")
         imgAgente.src = agente.imagen_url
-        imgAgente.alt = "FOTO DEL AGENTE " + mision.id_agente
+        imgAgente.alt = "AGENTE " + mision.id_agente
         const pAgente = document.getElementById("Nombre-Agente")
         pAgente.innerText = agente.nombre
 
@@ -32,7 +32,7 @@ async function llenar_pagina() {
         //VILLANO
         const imgVillano = document.getElementById("Img-Villano")
         imgVillano.src = villano.imagen_url
-        imgVillano.alt = "FOTO DEL AGENTE " + mision.id_villano
+        imgVillano.alt = "VILLANO " + mision.id_villano
         const pVillano = document.getElementById("Nombre-Villano")
         pVillano.innerText = villano.nombre
 
@@ -46,12 +46,12 @@ async function llenar_pagina() {
         const cardAgente = document.getElementById("Agente")
         cardAgente.style.cursor = "pointer"
         cardAgente.addEventListener("click", () => {
-            window.location.href = `agente.html?id=${mision.id_agente}`
+            window.location.href = `../agentes/agente.html?id=${mision.id_agente}`
         })
         const cardVillano = document.getElementById("Villano")
         cardVillano.style.cursor = "pointer"
         cardVillano.addEventListener("click", () => {
-            window.location.href = `villano.html?id=${mision.id_villano}`
+            window.location.href = `../villanos/villano.html?id=${mision.id_villano}`
         })
 
         const buttonEditar = document.getElementById("boton-editar")
