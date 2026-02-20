@@ -12,7 +12,7 @@ function crearMision() {
         edad: document.getElementById("edad").value,
         ocupacion: document.getElementById("ocupacion").value,
         ubicacion: document.getElementById("ubicacion").value,
-        estado: document.getElementById("estado").value = 1? "activo": "inactivo",
+        estado: document.getElementById("estado").value,
         apodo: document.getElementById("apodo").value,
         imagen_url: document.getElementById("imagen_url").value
     }
